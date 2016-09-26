@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/graphiql/0.7.8/graphiql.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-aNUYGqSUL9wG/vP7+cWZ5QOM4gsQou3sBfWRr/8S3R1Lv0rysEmnwsRKMbhiQX/O" crossorigin="anonymous">
+    <title>React-Apollo Starter Kit for Scaphold.io</title>
+  </head>
+  <style>
+    html, body {
+      height: 100%;
+    }
+  </style>
+  <body>
+    <span id="root"></span>
+    <script type="text/javascript">
+      // Force `fetch` polyfill to workaround Chrome not displaying request body
+      // in developer tools for the native `fetch`.
+      self.fetch = null;
+    </script>
+    <!--<script src="http://localhost:3001/webpack-dev-server.js"></script>-->
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "name": "react-apollo-starter-kit",
+  "private": true,
+  "description": "Scaphold.io's Starter Kit React and Apollo",
+  "repository": "scaphold-io/react-apollo-starter-kit",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "babel-node ./src/server.js",
+    "start-prod": "node ./lib/server.js",
+    "build": "cp src/index.html lib/ && babel src --out-dir lib --sourceRoot src",
+    "buildw": "cp src/index.html lib/ && babel src --out-dir lib -w --sourceRoot src"
+  },
+  "dependencies": {
+    "apollo-client": "^0.4.11",
+    "babel-core": "^6.7.7",
+    "babel-loader": "6.2.4",
+    "babel-polyfill": "6.7.4",
+    "babel-preset-es2015": "6.6.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "babel-relay-plugin": "0.8.1",
+    "chart.js": "^1.1.1",
+    "classnames": "2.2.4",
+    "express": "^4.13.4",
+    "graphiql": "^0.7.8",
+    "graphql": "^0.7.0",
+    "graphql-tag": "^0.1.11",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.3.0",
+    "react-apollo": "^0.4.5",
+    "react-bootstrap": "^0.30.2",
+    "react-chartjs": "^0.8.0",
+    "react-dom": "^15.3.0",
+    "react-fontawesome": "^1.1.0",
+    "react-router": "^2.8.1",
+    "react-router-scroll": "^0.3.2",
+    "static-site-generator-webpack-plugin": "^2.1.0",
+    "sync-request": "^2.0.1",
+    "webpack": "1.13.0",
+    "webpack-dev-server": "1.14.1"
+  },
+  "devDependencies": {
+    "babel-cli": "6.7.7",
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "static-site-generator-webpack-plugin": "^2.1.0",
+    "webpack": "^1.13.0"
+  }
+}
