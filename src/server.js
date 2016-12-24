@@ -6,7 +6,7 @@ import config from './config';
 
 const APP_PORT = 3001;
 
-var compiler = webpack({
+const compiler = webpack({
   entry: path.resolve(__dirname, 'js', 'app.js'),
   module: {
     loaders: [
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "production") {
   contentBase = 'lib/';
 }
 
-var app = new WebpackDevServer(compiler, {
+const app = new WebpackDevServer(compiler, {
   contentBase: contentBase,
   publicPath: '/js/',
   proxy: { '/graphql': config.scapholdUrl },

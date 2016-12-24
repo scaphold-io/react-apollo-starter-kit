@@ -8,7 +8,7 @@ import LoggedInHeader from './../Home/Header';
 function graphQLFetcher(graphQLParams) {
   return fetch(config.scapholdUrl, {
     method: 'post',
-    headers: { 
+    headers: {
       'Content-Type': 'application/json',
       'Authorization': localStorage.token ? 'Bearer ' + localStorage.token : ''
     },
@@ -18,7 +18,7 @@ function graphQLFetcher(graphQLParams) {
 
 class GraphiQLModule extends React.Component {
   render() {
-    var header;
+    let header;
     if (!localStorage.token) {
       header = <Header />;
     }

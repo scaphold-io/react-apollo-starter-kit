@@ -5,7 +5,7 @@ import FontAwesome from 'react-fontawesome';
 class Footer extends React.Component {
   render() {
     return (
-      <p style={styles.footer}>Made with <FontAwesome name='heart'/> from the Scaphold team</p>
+      <p style={styles.footer}>Made with <FontAwesome name='heart'/> from the Scaphold Team</p>
     );
   }
 }

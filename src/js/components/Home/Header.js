@@ -1,4 +1,6 @@
 import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import {hashHistory} from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import Logout from './Logout';
@@ -6,6 +8,7 @@ import Logout from './Logout';
 class Header extends React.Component {
   constructor(props) {
     super(props);
+
     this.goToGraphiQL = this.goToGraphiQL.bind(this);
     this.goHome = this.goHome.bind(this);
   }
@@ -19,7 +22,8 @@ class Header extends React.Component {
   }
 
   render() {
-    var loggedInUser = localStorage.email;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loggedInUser = user ? user.username : '';
 
     return (
       <Navbar style={styles.navbar}>

@@ -2,12 +2,12 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { hashHistory } from 'react-router';
-import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel} from 'react-bootstrap';
+import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
 import config from './../../../config';
 
 const CreateUserMutation = gql `
-  mutation CreateUserMutation($data: _CreateUserInput!) {
-    createUser (input: $data) {
+  mutation CreateUserMutation($data: CreateUserInput!) {
+    createUser(input: $data) {
       token
       changedUser {
         id
@@ -21,16 +21,19 @@ class Register extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       showModal: false,
-      registerEmail: undefined,
-      registerPassword: undefined,
-      errors: undefined
+      registerEmail: '',
+      registerPassword: '',
+      errors: []
     };
+
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this._handleRegisterEmailChange = this._handleRegisterEmailChange.bind(this);
     this._handleRegisterPasswordChange = this._handleRegisterPasswordChange.bind(this);
+    this.validateInput = this.validateInput.bind(this);
     this.registerUser = this.registerUser.bind(this);
   }
 
@@ -42,29 +45,50 @@ class Register extends React.Component {
     this.setState({ showModal: true });
   }
 
+  validateInput() {
+    return (
+      this.state.registerEmail && this.state.registerEmail.length &&
+      this.state.registerPassword && this.state.registerPassword.length
+    );
+  }
+
   registerUser() {
-    this.props.register({
-      username: this.state.registerEmail,
-      password: this.state.registerPassword
-    }).then(({ data }) => {
-      if (!data.errors) {
-        localStorage.setItem('token', data.createUser.token);
-        localStorage.setItem('userId', data.createUser.changedUser.id);
-        hashHistory.push('/home');
-      } else {
-        that.setState({ error: data.errors });
-      }
-    }).catch((error) => {
-      that.setState({ error });
-    });
+    if (this.validateInput()) {
+      this.props.register({
+        username: this.state.registerEmail,
+        password: this.state.registerPassword
+      }).then(({ data }) => {
+        if (!data.errors) {
+          debugger;
+          localStorage.setItem('token', data.createUser.token);
+          localStorage.setItem('user', JSON.stringify(data.createUser.changedUser));
+          this.setState({ errors: [] });
+          hashHistory.push('/home');
+        } else {
+          this.setState({ errors: data.errors });
+        }
+      }).catch(errors => {
+        this.setState({ errors: errors.graphQLErrors });
+      });
+    } else {
+      this.setState({
+        errors: [{
+          message: 'Username or password was not filled out. Please fill out the required fields.'
+        }]
+      });
+    }
   }
 
   _handleRegisterEmailChange(e) {
-    this.state.registerEmail = e.target.value;
+    this.setState({
+      registerEmail: e.target.value
+    });
   }
 
   _handleRegisterPasswordChange(e) {
-    this.state.registerPassword = e.target.value;
+    this.setState({
+      registerPassword: e.target.value
+    });
   }
 
   render() {
@@ -77,6 +101,9 @@ class Register extends React.Component {
             <Modal.Title>Register Here!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div style={styles.errors}>
+              {this.state.errors.map((err, i) => <Alert key={i} bsStyle="danger">{err.message}</Alert>)}
+            </div>
             <Form horizontal>
               <Row>
                 <FormGroup controlId="formRegisterEmail">
@@ -98,7 +125,6 @@ class Register extends React.Component {
                 </FormGroup>
               </Row>
             </Form>
-            <div style={styles.errors}>{this.state.errors}</div>
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" type="submit" onClick={this.registerUser}>Register</Button>
@@ -112,7 +138,7 @@ class Register extends React.Component {
 
 const styles = {
   errors: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: 'red'
   }
 };

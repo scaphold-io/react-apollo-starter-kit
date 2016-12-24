@@ -2,14 +2,17 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { hashHistory } from 'react-router';
-import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel} from 'react-bootstrap';
+import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
 import config from './../../../config';
 
 const LoginUserMutation = gql `
-  mutation LoginUserMutation($data: _LoginUserInput!) {
+  mutation LoginUserMutation($data: LoginUserInput!) {
     loginUser(input: $data) {
-      id,
       token
+      user {
+        id
+        username
+      }
     }
   }
 `;
@@ -20,14 +23,15 @@ class Login extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      loginEmail: undefined,
-      loginPassword: undefined,
-      errors: undefined
+      loginEmail: '',
+      loginPassword: '',
+      errors: []
     };
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this._handleLoginEmailChange = this._handleLoginEmailChange.bind(this);
     this._handleLoginPasswordChange = this._handleLoginPasswordChange.bind(this);
+    this.validateInput = this.validateInput.bind(this);
     this.loginUser = this.loginUser.bind(this);
   }
 
@@ -40,27 +44,48 @@ class Login extends React.Component {
   }
 
   _handleLoginEmailChange(e) {
-    this.state.loginEmail = e.target.value;
+    this.setState({
+      loginEmail: e.target.value
+    });
   }
+
   _handleLoginPasswordChange(e) {
-    this.state.loginPassword = e.target.value;
+    this.setState({
+      loginPassword: e.target.value
+    });
+  }
+
+  validateInput() {
+    return (
+      this.state.loginEmail && this.state.loginEmail.length &&
+      this.state.loginPassword && this.state.loginPassword.length
+    );
   }
 
   loginUser() {
-    this.props.login({
-      username: this.state.loginEmail,
-      password: this.state.loginPassword
-    }).then(({ data }) => {
-      if (!data.errors) {
-        localStorage.setItem('token', data.loginUser.token);
-        localStorage.setItem('userId', data.loginUser.id);
-        hashHistory.push('/home');
-      } else {
-        that.setState({ error: data.errors });
-      }
-    }).catch((error) => {
-      that.setState({ error });
-    });
+    if (this.validateInput()) {
+      this.props.login({
+        username: this.state.loginEmail,
+        password: this.state.loginPassword
+      }).then(({ data }) => {
+        if (!data.errors) {
+          localStorage.setItem('token', data.loginUser.token);
+          localStorage.setItem('user', JSON.stringify(data.loginUser.user));
+          this.setState({ errors: [] });
+          hashHistory.push('/home');
+        } else {
+          this.setState({ errors: data.errors });
+        }
+      }).catch(errors => {
+        this.setState({ errors: errors.graphQLErrors });
+      });
+    } else {
+      this.setState({
+        errors: [{
+          message: 'Username or password was not filled out. Please fill out the required fields.'
+        }]
+      });
+    }
   }
 
   render() {
@@ -73,6 +98,9 @@ class Login extends React.Component {
             <Modal.Title>Login Here!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div style={styles.errors}>
+              {this.state.errors.map((err, i) => <Alert key={i} bsStyle="danger">{err.message}</Alert>)}
+            </div>
             <Form horizontal>
               <FormGroup controlId="formLoginEmail">
                 <Col componentClass={ControlLabel} smOffset={1} sm={2}>
@@ -92,7 +120,6 @@ class Login extends React.Component {
                 </Col>
               </FormGroup>
             </Form>
-            <div style={styles.errors}>{this.state.errors}</div>
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" type="submit" onClick={this.loginUser}>Login</Button>
@@ -106,7 +133,7 @@ class Login extends React.Component {
 
 const styles = {
   errors: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: 'red'
   }
 };

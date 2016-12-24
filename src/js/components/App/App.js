@@ -12,28 +12,16 @@ import Description from './Description';
 import Footer from './Footer';
 
 const FragmentDoc = gql`
-fragment UserFragment on User {
-  id
-  username
-}
+  fragment UserFragment on User {
+    id
+    username
+  }
 `;
 
 const userQuery = gql`
   query GetUser($id: ID!) {
     getUser(id: $id) {
       ...UserFragment
-    }
-  }
-`;
-
-const createUserQuery = gql `
-  mutation CreateUserQuery($user: _CreateUserInput!){
-    createUser(input: $user) {
-      token
-      changedUser {
-        id
-        username
-      }
     }
   }
 `;
@@ -48,7 +36,8 @@ class App extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user ? user.id : null;
     if (token && userId) {
       // If we are logged in subscribe to the user and render the app.
       this.subscribeToUser(userId);
@@ -122,31 +111,4 @@ class App extends React.Component {
 
 App.propTypes = {};
 
-const componentWithData = graphql(createUserQuery, {
-  options: (ownProps) => ({
-    variables: {
-      user: {
-        username: createNewUsername(),
-        password: "password"
-      }
-    }
-  }),
-  props: ({ ownProps, mutate }) => ({
-    createUser(data) {
-      return mutate({
-        variables: {
-          user: {
-            username: data.username,
-            password: data.password
-          }
-        }
-      }).then(({ data }) => {
-        // Successfully created new user
-        return data.createUser;
-      }).catch((error) => {
-        console.log('There was an error sending the query', error);
-      });     
-    }
-  })
-})(App);
-export default componentWithData;
+export default App;
