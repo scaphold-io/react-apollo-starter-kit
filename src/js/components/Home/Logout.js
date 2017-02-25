@@ -1,5 +1,5 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { NavItem } from 'react-bootstrap';
 
 class Logout extends React.Component {
@@ -11,7 +11,7 @@ class Logout extends React.Component {
 
   logoutUser() {
     localStorage.clear();
-    hashHistory.push('/');
+    browserHistory.push('/');
   }
 
   render() {

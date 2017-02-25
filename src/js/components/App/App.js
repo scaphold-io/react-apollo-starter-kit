@@ -2,26 +2,19 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import client from '../../../apollo';
-import { createFragment } from 'apollo-client';
 import config from '../../../config';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import {Grid, Row, Col, Button, Jumbotron} from 'react-bootstrap';
 import Header from './Header';
 import Hero from './Hero';
 import Description from './Description';
 import Footer from './Footer';
 
-const FragmentDoc = gql`
-  fragment UserFragment on User {
-    id
-    username
-  }
-`;
-
 const userQuery = gql`
   query GetUser($id: ID!) {
     getUser(id: $id) {
-      ...UserFragment
+      id
+      username
     }
   }
 `;
@@ -53,7 +46,6 @@ class App extends React.Component {
     const that = this;
     const observable = client.watchQuery({
       query: userQuery,
-      fragments: createFragment(FragmentDoc),
       pollInterval: 60000,
       forceFetch: true,
       variables: {
@@ -79,7 +71,7 @@ class App extends React.Component {
             user: result.data.getUser,
             loading: false,
           });
-          hashHistory.push('/home');
+          browserHistory.push('/home');
         }
       },
       error(error) {

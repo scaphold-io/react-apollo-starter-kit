@@ -17,7 +17,7 @@ class Hero extends React.Component {
             <br />
             <p>
               <Button bsStyle="primary" bsSize="large" target="_blank" href="https://scaphold.io">Learn more <FontAwesome name="check" /></Button>
-              <Button style={styles.slack} bsSize="large" target="_blank" href="https://scapholdslackin.herokuapp.com/">Join our Slack <FontAwesome name="slack" /></Button>
+              <Button style={styles.slack} bsSize="large" target="_blank" href="http://slack.scaphold.io">Join our Slack <FontAwesome name="slack" /></Button>
             </p>
           </Jumbotron>
         </Col>

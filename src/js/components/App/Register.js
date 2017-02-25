@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
 import config from './../../../config';
 
@@ -63,7 +63,7 @@ class Register extends React.Component {
           localStorage.setItem('token', data.createUser.token);
           localStorage.setItem('user', JSON.stringify(data.createUser.changedUser));
           this.setState({ errors: [] });
-          hashHistory.push('/home');
+          browserHistory.push('/home');
         } else {
           this.setState({ errors: data.errors });
         }

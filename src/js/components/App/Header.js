@@ -1,5 +1,5 @@
 import React from 'react';
-import {hashHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import Login from './Login';
 import Register from './Register';
@@ -14,11 +14,11 @@ class Header extends React.Component {
   }
 
   goToGraphiQL() {
-    hashHistory.push('/graphiql');
+    browserHistory.push('/graphiql');
   }
 
   goHome() {
-    hashHistory.push('/');
+    browserHistory.push('/');
   }
 
   render() {

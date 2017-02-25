@@ -16,12 +16,11 @@ class Body extends React.Component {
             <Row style={styles.subheading}>
                 <Col smOffset={3} sm={6}>
                     {
-                        loggedInUser ?
-                         (
-                             <div style={styles.subheading.section}>
+                        loggedInUser ? (
+                            <div style={styles.subheading.section}>
                                 Username: <b>{loggedInUser}</b>
                             </div>
-                         ) : ''
+                        ) : ''
                     }
                     <div style={styles.subheading.section}>
                         Feel free to poke around and check out the other functionality that this starter kit provides.
@@ -32,7 +31,7 @@ class Body extends React.Component {
                     </div>
                     <div style={styles.subheading.section}>
                         <Button bsStyle="primary" bsSize="large" target="_blank" href="https://scaphold.io">Learn more <FontAwesome name="check" /></Button>
-                        <Button style={styles.slack} bsSize="large" target="_blank" href="https://scapholdslackin.herokuapp.com/">Join our Slack <FontAwesome name="slack" /></Button>
+                        <Button style={styles.slack} bsSize="large" target="_blank" href="http://slack.scaphold.io">Join our Slack <FontAwesome name="slack" /></Button>
                     </div>
                 </Col>
             </Row>

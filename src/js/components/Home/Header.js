@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import {hashHistory} from 'react-router';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import { Link, browserHistory } from 'react-router';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Logout from './Logout';
 
 class Header extends React.Component {
@@ -14,11 +14,11 @@ class Header extends React.Component {
   }
 
   goToGraphiQL() {
-    hashHistory.push('/graphiql');
+    browserHistory.push('/graphiql');
   }
 
   goHome() {
-    hashHistory.push('/');
+    browserHistory.push('/home');
   }
 
   render() {
@@ -29,7 +29,7 @@ class Header extends React.Component {
       <Navbar style={styles.navbar}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Scaphold</a>
+            <Link to="/home">Scaphold</Link>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true}>

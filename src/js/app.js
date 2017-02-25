@@ -1,7 +1,6 @@
-import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyRouterMiddleware, Router, Route, routes, browserHistory, hashHistory } from 'react-router';
+import { applyRouterMiddleware, Router, Route, routes, browserHistory } from 'react-router';
 import { ApolloProvider } from 'react-apollo';
 import App from './components/App/App';
 import Home from './components/Home/Home';
@@ -11,7 +10,7 @@ import client from '../apollo';
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router
-      history={hashHistory}
+      history={browserHistory}
       routes={routes}
       render={
         applyRouterMiddleware()
