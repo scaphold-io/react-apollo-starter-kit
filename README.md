@@ -19,6 +19,10 @@ Fork this boilerplate code to get started with GraphQL, React, and Apollo.
 
 *Note: For development, you only need to run ```npm start```*
 
-1) Run ```npm run build``` to transpile ES6 code from the src/ directory to JavaScript in the lib/ directory.
+Run ```npm run deploy```.
 
-2) Set the environment variable ```process.env.NODE_ENV = 'production'``` to let server.js know to run the code in the lib/ directory.
+This will run two scripts automatically:
+
+1) ```npm run build``` to transpile ES6 code from the src/ directory to JavaScript in the lib/ directory.
+
+2) ```npm run wp``` to set the environment variable ```process.env.NODE_ENV = 'production'```, allow webpack to build your code from lib/, and save it to the build/ directory.
