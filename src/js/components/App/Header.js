@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import Login from './Login';
 import Register from './Register';
-import Logout from '../Home/Logout';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
-    }
+      showModal: false,
+    };
   }
 
   goToGraphiQL() {
@@ -29,7 +28,7 @@ class Header extends React.Component {
             <Link to="/">Scaphold</Link>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav pullRight={true}>
+        <Nav pullRight>
           <NavItem onClick={this.goHome}>Home</NavItem>
           <NavItem onClick={this.goToGraphiQL}>GraphiQL</NavItem>
           <Login />
@@ -44,6 +43,6 @@ export default Header;
 
 const styles = {
   navbar: {
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
 };

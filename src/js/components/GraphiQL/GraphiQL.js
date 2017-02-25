@@ -10,7 +10,7 @@ function graphQLFetcher(graphQLParams) {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': localStorage.token ? `Bearer ${localStorage.token}` : ''
+      Authorization: localStorage.token ? `Bearer ${localStorage.token}` : '',
     },
     body: JSON.stringify(graphQLParams),
   }).then(response => response.json());

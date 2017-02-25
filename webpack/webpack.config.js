@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // console.log('dir');
 // console.log(path.resolve(process.cwd(), 'app/assets/styles'));
 
-module.exports = (options) => ({
+module.exports = () => ({
   entry: path.join(process.cwd(), 'lib', 'js', 'app.js'),
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const express = require('express');
+const webpack = require('webpack'); // eslint-disable-line
+const WebpackDevServer = require('webpack-dev-server'); // eslint-disable-line
 const config = require('./config');
+
 const APP_PORT = 3001;
 
 // Production version

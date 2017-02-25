@@ -21,5 +21,5 @@ ReactDOM.render(
       <Route path="/graphiql" component={GraphiQLModule} />
     </Router>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'), // eslint-disable-line
 );

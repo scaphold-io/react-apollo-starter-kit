@@ -1,10 +1,7 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import client from '../../../apollo';
-import config from '../../../config';
 import { browserHistory } from 'react-router';
-import { Grid, Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import client from '../../../apollo';
 import Header from './Header';
 import Hero from './Hero';
 import Description from './Description';
@@ -23,7 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
     };
   }
 

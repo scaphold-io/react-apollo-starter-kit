@@ -1,8 +1,16 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
-class Footer extends React.Component {
+const styles = {
+  footer: {
+    textAlign: 'center',
+    paddingTop: 20,
+    color: '#777',
+    borderTop: '1px, solid, #e5e5e5',
+  },
+};
+
+class Footer extends React.Component { // eslint-disable-line
   render() {
     return (
       <p style={styles.footer}>Made with <FontAwesome name='heart'/> from the Scaphold Team</p>
@@ -11,12 +19,3 @@ class Footer extends React.Component {
 }
 
 export default Footer;
-
-const styles = {
-  footer: {
-    textAlign: 'center',
-    paddingTop: 20,
-    color: '#777',
-    borderTop: '1px, solid, #e5e5e5'
-  }
-};

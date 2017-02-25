@@ -56,10 +56,9 @@ class Register extends React.Component {
     if (this.validateInput()) {
       this.props.register({
         username: this.state.registerEmail,
-        password: this.state.registerPassword
+        password: this.state.registerPassword,
       }).then(({ data }) => {
         if (!data.errors) {
-          debugger;
           localStorage.setItem('token', data.createUser.token);
           localStorage.setItem('user', JSON.stringify(data.createUser.changedUser));
           this.setState({ errors: [] });
@@ -67,7 +66,7 @@ class Register extends React.Component {
         } else {
           this.setState({ errors: data.errors });
         }
-      }).catch(errors => {
+      }).catch((errors) => {
         this.setState({ errors: errors.graphQLErrors });
       });
     } else {

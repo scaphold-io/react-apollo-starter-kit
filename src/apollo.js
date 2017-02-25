@@ -2,7 +2,7 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import config from './config';
 
 const networkInterface = createNetworkInterface({
-  uri: config.scapholdUrl
+  uri: config.scapholdUrl,
 });
 networkInterface.use([{
   applyMiddleware(req, next) {
@@ -13,11 +13,11 @@ networkInterface.use([{
       req.options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
     next();
-  }
+  },
 }]);
 
 const client = new ApolloClient({
-  networkInterface
+  networkInterface,
 });
 
 export default client;
