@@ -54,7 +54,8 @@
         "class-methods-use-this": 0,
         "no-plusplus": 0,
         "no-underscore-dangle": 0,
-        "react/no-array-index-key": 0
+        "react/no-array-index-key": 0,
+        "react/prefer-stateless-function": 0
     },
     "env": {
         "node": true,
@@ -64,5 +65,9 @@
         "flowtype": {
             "onlyFilesWithFlowAnnotation": false
         }
+    },
+    "globals": {
+        "window": true,
+        "localStorage": true
     }
 }

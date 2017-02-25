@@ -2,8 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { browserHistory } from 'react-router';
-import { Button, Modal, OverlayTrigger, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
-import config from './../../../config';
+import { Button, Modal, NavItem, Form, FormControl, FormGroup, Row, Col, ControlLabel, Alert } from 'react-bootstrap';
 
 const CreateUserMutation = gql `
   mutation CreateUserMutation($data: CreateUserInput!) {

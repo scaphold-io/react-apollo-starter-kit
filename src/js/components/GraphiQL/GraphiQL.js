@@ -17,7 +17,6 @@ function graphQLFetcher(graphQLParams) {
 }
 
 class GraphiQLModule extends React.Component {
-  debugger;
   render() {
     let header;
     if (!localStorage.token) {
