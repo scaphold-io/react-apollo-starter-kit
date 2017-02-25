@@ -1,6 +1,6 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import { Link, browserHistory } from 'react-router';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Login from './Login';
 import Register from './Register';
 import Logout from '../Home/Logout';
@@ -26,7 +26,7 @@ class Header extends React.Component {
       <Navbar style={styles.navbar}>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Scaphold</a>
+            <Link to="/">Scaphold</Link>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true}>

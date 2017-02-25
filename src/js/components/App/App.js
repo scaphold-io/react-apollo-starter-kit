@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import client from '../../../apollo';
 import config from '../../../config';
 import { browserHistory } from 'react-router';
-import {Grid, Row, Col, Button, Jumbotron} from 'react-bootstrap';
+import { Grid, Row, Col, Button, Jumbotron } from 'react-bootstrap';
 import Header from './Header';
 import Hero from './Hero';
 import Description from './Description';
